@@ -4,7 +4,7 @@ class Player {//represents a pla=yer in the game
     }
 }
 
-class Game {//main class that represents the connect4 game
+class ConnectFour {//main class that represents the connect4 game
     constructor(p1, p2, HEIGHT, WIDTH) {//sets up the initial game state
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
@@ -122,6 +122,9 @@ class Game {//main class that represents the connect4 game
     }
 
     checkForWin() {
+
+        // console.log("this should show youre winning")
+
         const _this = this; 
 
         function _win(cells) {
@@ -133,7 +136,7 @@ class Game {//main class that represents the connect4 game
                     y < _this.HEIGHT &&
                     x >= 0 &&
                     x < _this.WIDTH &&
-                    _this.board[y][x] === _this.currPlayer
+                    _this.board[y][x] === _this.currPlayer.color //comparing with current player color 
                 );
             });
         }
@@ -155,19 +158,21 @@ class Game {//main class that represents the connect4 game
     }
 }
 
-const p1 = new Player('red');
-const p2 = new Player('blue');
+// const p1 = new Player('red');
+// const p2 = new Player('blue');
 
-const game = new ConnectFour(p1, p2, 6, 7);  // Set the HEIGHT and WIDTH as needed
+// const game = new ConnectFour(p1, p2, 6, 7);  // Set the HEIGHT and WIDTH as needed
 
-document.getElementById('start-game').addEventListener('click', function() {
-    const p1Color = document.getElementById('p1-color').value; // default to red if no value
-    const p2Color = document.getElementById('p2-color').value;// default to blue if no value
+document.getElementById('start-game').addEventListener('click', function(event) {
+    event.preventDefault(); //prevents the form from actually submitting anyting 
+
+    const p1Color = document.getElementById('player1Color').value; // default to red if no value
+    const p2Color = document.getElementById('player2Color').value;// default to blue if no value
 
     const p1 = new Player(p1Color);
     const p2 = new Player(p2Color);
 
-    const game = new Game(p1, p2, 6, 7);
+    const game = new ConnectFour(p1, p2, 6, 7);
     game.init();
 });
 
